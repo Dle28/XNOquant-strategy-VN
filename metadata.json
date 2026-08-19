@@ -1,68 +1,102 @@
 {
   "source": "XNOQuant live API",
-  "verified_at": "2026-08-16",
-  "account": "Dũng Lê",
+  "verified_at": "2026-08-19",
+  "status": "final_3_chot_cho_vong_3",
+  "accounts": {
+    "TK1": "dung.levc2810@gmail.com (Dũng Lê)",
+    "TK2": "khaiapmops2006@gmail.com (Nguyễn Quang Khải)"
+  },
   "strategies": [
     {
       "presentation_order": 1,
-      "id": "7cNI7deXQO",
-      "name_on_platform": "Untitled 71",
-      "universe": "VN-LARGE-CAP",
-      "market": "Vietnam Stock",
-      "status": "published",
-      "published_at": "2026-08-03T09:22:53.343056Z",
-      "metrics": {
-        "sharpe": 1.7405516358881419,
-        "cagr": 0.3982936943298283,
-        "max_drawdown": -0.12091114400763436,
-        "profit_factor": 1.4443101903283346,
-        "calmar": 3.294102438575768,
-        "total_trades": 1220
-      },
-      "event_correlation_score": 11,
-      "all_five_evaluations_passed": true,
-      "code_file": "strategy_1_large_cap_7cNI7deXQO.py"
-    },
-    {
-      "presentation_order": 2,
-      "id": "IwEa1HnCXD",
-      "name_on_platform": "Untitled 102",
-      "universe": "VN30F1M-05MIN",
-      "market": "Vietnam Future",
-      "status": "published",
-      "published_at": "2026-07-26T15:41:37.228195Z",
-      "metrics": {
-        "sharpe": 2.3497155824724056,
-        "cagr": 0.27446134659496657,
-        "max_drawdown": -0.04481869904203084,
-        "profit_factor": 2.063912903389423,
-        "calmar": 6.123813329152052,
-        "total_trades": 1346
-      },
-      "event_correlation_score": null,
-      "event_correlation_http_status": 404,
-      "all_five_evaluations_passed": true,
-      "code_file": "strategy_2_vn30f1m_IwEa1HnCXD.py"
-    },
-    {
-      "presentation_order": 3,
-      "id": "JHmitDIJDi",
-      "name_on_platform": "Untitled 139",
+      "name_on_platform": "Strategy 1",
+      "id": "lsGgvzSWeg",
+      "account": "TK1",
       "universe": "VN-MID-CAP",
       "market": "Vietnam Stock",
       "status": "published",
-      "published_at": "2026-08-11T06:22:45.296514Z",
-      "metrics": {
-        "sharpe": 2.486134876058042,
-        "cagr": 0.23300608936956113,
-        "max_drawdown": -0.10798953131382572,
-        "profit_factor": 1.555053877970316,
-        "calmar": 2.15767293859504,
-        "total_trades": 1229
+      "published_at": "2026-08-05T13:24:44.470677Z",
+      "init_cash": 30000000000,
+      "metrics_full": {
+        "sharpe": 2.803141410822776,
+        "sortino": 4.895621487607373,
+        "cagr": 0.25005157333338546,
+        "max_drawdown": -0.06399286436143248,
+        "profit_factor": 1.6496277372873602,
+        "calmar": 3.9074914965078547,
+        "total_trades": 1220,
+        "total_fee": 0.19674332369082928,
+        "win_rate": 0.5909836065573766,
+        "cumulative_return": 2.0254731897236495
       },
-      "event_correlation_score": 32,
-      "all_five_evaluations_passed": true,
-      "code_file": "strategy_3_mid_cap_JHmitDIJDi.py"
+      "metrics_stages": {
+        "train": {"period": "2020-01-03..2022-12-31", "sharpe": 2.9985986282389385, "cagr": 0.3172439645563703, "max_drawdown": -0.06399286436143248, "profit_factor": 1.728252743748897},
+        "test": {"period": "2023-01-04..2025-01-01", "sharpe": 2.540231295641907, "cagr": 0.15277907719714978, "max_drawdown": -0.036974993437895676, "profit_factor": 1.5231433333904743},
+        "simulate": {"period": "2020-01-03..2025-01-01", "sharpe": 2.803141410822776, "cagr": 0.25005157333338546, "max_drawdown": -0.06399286436143248, "profit_factor": 1.6496277372873602}
+      },
+      "idea": "Equity issuance dilution - short issuers",
+      "code_file": "strategy_1_equity_mid_cap_lsGgvzSWeg.py"
+    },
+    {
+      "presentation_order": 2,
+      "name_on_platform": "Strategy 2",
+      "id": "EuVTWCWMNF",
+      "account": "TK2",
+      "universe": "VN30F1M-30MIN",
+      "market": "Vietnam Future",
+      "status": "published",
+      "published_at": "2026-07-26T15:34:56.221188Z",
+      "init_cash": 1000000000,
+      "metrics_full": {
+        "sharpe": 2.843572493967588,
+        "sortino": 6.142086688674526,
+        "cagr": 0.3976374674889336,
+        "max_drawdown": -0.07137728459529924,
+        "profit_factor": 2.0671151306166773,
+        "calmar": 5.570924555871241,
+        "total_trades": 2210,
+        "total_fee": 0.3978,
+        "win_rate": 0.5520094562647747,
+        "cumulative_return": 4.241699999999992
+      },
+      "metrics_stages": {
+        "train": {"period": "2020-01-03..2022-12-31", "sharpe": 3.090403521129005, "cagr": 0.593597592631292, "max_drawdown": -0.07137728459529924, "profit_factor": 2.1598087099619616},
+        "test": {"period": "2023-01-04..2025-01-01", "sharpe": 2.393775734368327, "cagr": 0.4971208599286334, "max_drawdown": -0.06893783094325878, "profit_factor": 1.8156058865958624},
+        "simulate": {"period": "2020-01-03..2025-01-01", "sharpe": 2.843572493967588, "cagr": 0.3976374674889336, "max_drawdown": -0.07137728459529924, "profit_factor": 2.0671151306166773}
+      },
+      "idea": "Volume-weighted return pressure (futures vs VN30)",
+      "code_file": "strategy_2_derivative_vn30f1m_EuVTWCWMNF.py"
+    },
+    {
+      "presentation_order": 3,
+      "name_on_platform": "Strategy 3",
+      "id": "Z0URlGzUp9",
+      "account": "TK1",
+      "universe": "VN-MID-CAP",
+      "market": "Vietnam Stock",
+      "status": "published",
+      "published_at": "2026-08-05T17:11:18.622262Z",
+      "init_cash": 30000000000,
+      "metrics_full": {
+        "sharpe": 2.7936264416900394,
+        "sortino": 4.736923893715446,
+        "cagr": 0.2300238261539822,
+        "max_drawdown": -0.06302921746483092,
+        "profit_factor": 1.6244370819111416,
+        "calmar": 3.6494793272450434,
+        "total_trades": 1220,
+        "total_fee": 0.17760869447214878,
+        "win_rate": 0.5827868852459012,
+        "cumulative_return": 1.7925414176569374
+      },
+      "metrics_stages": {
+        "train": {"period": "2020-01-03..2022-12-31", "sharpe": 2.9241657332716833, "cagr": 0.2885074076754035, "max_drawdown": -0.06302921746483092, "profit_factor": 1.671635642420544},
+        "test": {"period": "2023-01-04..2025-01-01", "sharpe": 2.3959197639168384, "cagr": 0.13035289172239906, "max_drawdown": -0.036564365025058554, "profit_factor": 1.4891106042728524},
+        "simulate": {"period": "2020-01-03..2025-01-01", "sharpe": 2.7936264416900394, "cagr": 0.2300238261539822, "max_drawdown": -0.06302921746483092, "profit_factor": 1.6244370819111416}
+      },
+      "idea": "Buyback commitment - long repurchasers (đối lập Strategy 1)",
+      "code_file": "strategy_3_equity_mid_cap_Z0URlGzUp9.py"
     }
-  ]
+  ],
+  "note": "Loai bo LARGE-CAP (7cNI7deXQO) va mid-cap cu (JHmitDIJDi) va futures 05MIN (IwEa1HnCXD) do overfit hoac yeu hon - chi tiet trong NOTES_best3_selection.md"
 }

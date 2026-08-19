@@ -1,0 +1,6 @@
+.venv/
+node_modules/
+.playwright-mcp/
+*.log
+__pycache__/
+*.pyc

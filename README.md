@@ -1,38 +1,33 @@
-# DSTC 2026 Round 3 — Strategy candidates
+# DSTC 2026 Round 3 — Final 3 Strategies
 
-1. Strategy 1 — 7cNI7deXQO — VN-LARGE-CAP
-   - Published: 2026-08-03
-   - Sharpe: 1.741
-   - CAGR: 39.8%
-   - Max drawdown: -12.1%
-   - Profit factor: 1.444
-   - Calmar: 3.294
-   - Event correlation score: 11
-   - Ý tưởng: share-count discipline — giảm pha loãng và cải thiện giá trị trên mỗi cổ phần.
+Top 3 strategies selected for the Grand Final (all **Published**, renamed **Strategy 1/2/3** on platform, deadline 20/08/2026 17:00 GMT+7):
 
-2. Strategy 2 — IwEa1HnCXD — VN30F1M-05MIN
-   - Published: 2026-07-26
-   - Sharpe: 2.350
-   - CAGR: 27.4%
-   - Max drawdown: -4.5%
-   - Profit factor: 2.064
-   - Calmar: 6.124
-   - Event correlation score: chưa khả dụng qua endpoint hiện tại; HTTP 404 không được diễn giải là score 0.
-   - Ý tưởng: dual KAMA slope, ATR normalization, VN30 confirmation và active-session filter.
+## Strategy 1 — Equity: VN-MID-CAP — `lsGgvzSWeg` (TK1)
+- Universe: VN-MID-CAP · init cash 30B VND · published 2026-08-05
+- Full: Sharpe 2.80 · CAGR 25.0% · MaxDD -6.4% · PF 1.65 · Calmar 3.91 · 1,220 trades
+- Train/Test: Sharpe 3.00 → **2.54** (decay 0.85) · test MDD -3.7%
+- Cost: 19.7% total fees over 5y (~3.9%/yr)
+- Ý tưởng: **Equity issuance dilution** — short các công ty phát hành thêm cổ phiếu (proceeds from issue / total assets).
 
-3. Strategy 3 — JHmitDIJDi — VN-MID-CAP
-   - Published: 2026-08-11
-   - Sharpe: 2.486
-   - CAGR: 23.3%
-   - Max drawdown: -10.8%
-   - Profit factor: 1.555
-   - Calmar: 2.158
-   - Event correlation score: 32
-   - Ý tưởng: quarterly financing-cash regime relative to assets, kết hợp ROA, earnings yield, volatility và liquidity.
+## Strategy 2 — Derivative: VN30F1M-30MIN — `EuVTWCWMNF` (TK2)
+- Universe: VN30F1M-30MIN · init cash 1B VND · published 2026-07-26
+- Full: Sharpe 2.84 · CAGR 39.8% · MaxDD -7.1% · PF 2.07 · Calmar 5.57 · 2,210 trades
+- Train/Test: Sharpe 3.09 → **2.39** (decay 0.77) · test MDD -6.9%
+- Cost: 39.8% total fees over 5y (~8%/yr)
+- Ý tưởng: **Volume-weighted return pressure** — momentum futures có xác nhận volume đồng thuận với VN30 (lead-lag microstructure).
 
-Các file:
+## Strategy 3 — Free: Equity VN-MID-CAP — `Z0URlGzUp9` (TK1)
+- Universe: VN-MID-CAP · init cash 30B VND · published 2026-08-05
+- Full: Sharpe 2.79 · CAGR 23.0% · MaxDD -6.3% · PF 1.62 · Calmar 3.65 · 1,220 trades
+- Train/Test: Sharpe 2.92 → **2.40** (decay 0.82) · test MDD -3.7%
+- Cost: 17.8% total fees over 5y (~3.6%/yr)
+- Ý tưởng: **Buyback commitment** — long các công ty mua lại cổ phiếu/trả cổ tức (ngược với issuance của Strategy 1).
 
-- strategy_1_large_cap_7cNI7deXQO.py
-- strategy_2_vn30f1m_IwEa1HnCXD.py
-- strategy_3_mid_cap_JHmitDIJDi.py
-- metadata.json
+## Files
+
+- `strategy_1_equity_mid_cap_lsGgvzSWeg.py`
+- `strategy_2_derivative_vn30f1m_EuVTWCWMNF.py`
+- `strategy_3_equity_mid_cap_Z0URlGzUp9.py`
+- `EXPORT_best3_final.md` — số liệu đầy đủ + câu trả lời Q1–Q5 cho slide
+- `NOTES_best3_selection.md` — quá trình phân tích & chọn lựa (lý do loại LARGE-CAP overfit)
+- `data/` — raw JSON từ API (full/train/test/simulate)
