@@ -128,7 +128,7 @@ Kết luận:
 | # | Chiến lược | Khuyến nghị | Lý do |
 |---|---|---|---|
 | 1 | **S2** (derivative) | **KEEP AS IS** | Mọi lớp thành phần đều verified; OOS decay thấp (train 3.09 → test 2.39); cấu hình hiện tại là net-of-fee tốt nhất. Không đổi gì. |
-| 2 | **S3** (buyback) | **REPLACE NARRATIVE** (giữ code nhưng đổi story) | Field buyback ghi âm (31 vs 7 obs), filter `bought>=0` của gốc loại đúng giao dịch mua lại thật; dù sửa dấu (S3-E/F/G) không có alpha. Nếu được sửa code: bỏ `c` khỏi signal, giữ gate → S3-D (2.84). Nếu không được sửa: trình bày S3 như "multifactor skeleton + buyback universe filter", không nhấn "buyback anomaly". |
+| 2 | **S3** (buyback) | **REPLACE bằng N-G** — xem section F | Field buyback ghi âm (31 vs 7 obs), filter `bought>=0` của gốc loại đúng giao dịch mua lại thật; dù sửa dấu (S3-E/F/G) không có alpha; và S3-ORIG trùng S1 (corr 0.898). Đã chọn N-G (`Bbjp7rFqoX`, VN-SMALL-CAP skeleton, Sharpe 2.60, corr S1 0.072). |
 | 3 | **S1** (issuance) | **REFINE STORY** (dấu đúng, weight giảm) | S1-F (đảo dấu `-c`) = 2.911 > gốc 2.80 → dấu SHORT issuers đúng. Nhưng S1-D (bỏ c khỏi signal, giữ gate 0.3–0.9) = 2.94 cao nhất → issuance hoạt động như filter hơn là directional weight; khuyến nghị narrative "issuance-conditioned multifactor" và nếu được phép sửa code, bỏ weight `c` giữ gate. |
 | 4 | **S1 & S3 chung** | **Đa dạng hóa không tồn tại** | Corr daily 0.8983 / monthly 0.8923 — hai strategy gần như một (cùng skeleton v+d+y+r). Không được trình bày như 2 luận điểm đối lập đa dạng hóa. |
 | 5 | **Portfolio** | Nếu được chọn lại universe/cơ chế | Core alpha = volatility×traded-value spread; y và r gần như thừa; buyback vô hiệu; issuance chỉ là filter. |
@@ -151,3 +151,42 @@ Kết luận:
 - `/tmp/opencode/xno/ablation/diag_summary.json` — metrics chuẩn hóa cho bảng A.
 - Code: `s1_f.py`, `s1_g1..g4.py`, `m_ma..mg.py`, `p_neg/p_zero/p_pos/p_ge0/p_all/p_cdf_*.py`, `p_long/p_short.py`, `s3_e/f/g.py`.
 - Strategy IDs (TK1): S1-F=`CGB1sbBkeg`, S1-G1=`kRUROXbdb5`, S1-G2=`21DjhjYNQ6`, S1-G3=`FEUiOnTzVe`, S1-G4=`9WiFHxcIPU`, M-A=`RMQHLx19OE`, M-B=`jzeiMVuR6V`, M-C=`Qt8O2unm02`, M-D=`iVx161R1ax`, M-E=`8OZljPf9tv`, M-F=`uP9WoKDP6J`, M-G=`Cujb0Q8bVk`, P-NEG=`bH0hXWFlhc`, P-POS=`tvfNENwBbn`, P-GE0=`6zKspRM0KR`, P-ALL=`8zER5D8klM`, P-CDF0.0001=`D4C3fNZcDy`, P-LONG=`qiPnpzienY`, P-SHORT=`3duTcZkNob`, S3-E=`S58WXNrSjw`, S3-F=`YXXuPnFIlx`, S3-G=`7WSnwgDTml`.
+
+---
+
+## F. S3 REPLACEMENT — CHỌN BEST STRATEGY KHÁC (20/08/2026)
+
+> Lý do: S3-ORIG (buyback MID-CAP) có **corr daily 0.898 với S1** — hai strategy gần như một (cùng skeleton v+d+y+r). Chạy candidates trên universe khác với cùng cơ chế core (volatility LONG × traded-value SHORT) để tìm strategy **độc lập với S1** nhưng vẫn có alpha.
+
+### F.1. Candidates đã chạy (results3.jsonl)
+
+| Label | Universe | Cơ chế | Full Sharpe | Train | Test | Corr vs S1 (daily, n=1250) |
+|---|---|---|---|---|---|---|
+| N-A | VN-SMALL-CAP | Momentum 12-1 | **-0.76** | — | — | 0.115 |
+| N-B | VN-LARGE-CAP | Momentum 12-1 | **-0.61** | — | — | — |
+| N-C | VN-SMALL-CAP | Momentum + issuance gate | **-1.95** | — | — | — |
+| N-D | VN-MID-CAP | Momentum 12-1 | **-0.87** | — | — | — |
+| N-E | VN-LARGE-CAP | Low-volatility | **-1.37** | — | — | — |
+| N-F | VN-LARGE-CAP | Skeleton v+d+y+r | **1.56** | 1.99 | 0.98 | **0.444** |
+| **N-G** | **VN-SMALL-CAP** | **Skeleton v+d+y+r** | **2.60** | **3.29** | **1.61** | **0.072** |
+| N-H | VN-SMALL-CAP | Skeleton + issuance gate 0.3–0.9 | **2.42** | — | — | **0.094** |
+| N-I | VN-SMALL-CAP | Skeleton + buyback gate | **2.63** | — | — | **0.067** |
+
+- **Momentum (12-1) không có alpha trên VN** — âm trên cả 3 universe (SMALL/LARGE/MID), kể cả có gate. Loại.
+- **Low-volatility LARGE-CAP âm** (-1.37) — core skeleton (v×d) vẫn là cơ chế duy nhất có alpha.
+- **VN-SMALL-CAP là universe tốt nhất** cho cơ chế core: Sharpe 2.60 (train 3.29 / test 1.61), MDD -3.3%, PF 1.57, 1,220 trades, fee 18.1% — và **gần như độc lập với S1 (corr 0.072)**.
+- Gate issuance/buyback trên SMALL-CAP (N-H, N-I) không cải thiện đáng kể (2.42 / 2.63) và làm phức tạp narrative → giữ bản skeleton thuần.
+
+### F.2. Quyết định — S3 MỚI
+
+- **Chọn: N-G — "Strategy 3 v2 - SMALL-CAP skeleton"** (code `n_g.py`, universe `VN-SMALL-CAP`, signal `v*0.30 - d*0.30 + y*0.10 + r*0.10`).
+- Strategy ID: **`Bbjp7rFqoX`** (TK1, editor `a944e5e5-890e-461c-a8e4-b5605d31bfc4`). Full Sharpe **2.598**, MDD -3.3%, corr vs S1 **0.072** (vs 0.898 của S3-ORIG).
+- Narrative: cùng core "volatility/liquidity spread" nhưng áp trên **small-cap VN** — pool khác hẳn MID-CAP → đa dạng hóa thật (corr 0.07), không phải "buyback anomaly" không có bằng chứng.
+- **Lưu ý trạng thái**: platform chỉ auto-publish universe MID/LARGE-CAP; mọi strategy VN-SMALL-CAP giữ status **"completed"** (valid_to_show_live=False) dù Sharpe cao. Đây là quy tắc platform, không phải lỗi strategy. Nếu ban tổ chức yêu cầu strategy phải "published", fallback là **N-F** (`Vh4MFEEuKh`, VN-LARGE-CAP skeleton, Sharpe 1.56, published, corr S1 0.444).
+
+### F.3. Cập nhật khuyến nghị
+
+| # | Chiến lược | Khuyến nghị mới |
+|---|---|---|
+| 2 | **S3** (buyback) | **REPLACE bằng N-G** (`Bbjp7rFqoX`, VN-SMALL-CAP skeleton, Sharpe 2.60, corr S1 0.072) thay vì "giữ code đổi story" như mục C. Buyback trên MID-CAP không có bằng chứng alpha và làm S3 trùng S1. |
+| 4 | S1 & S3 chung | Corr giảm từ **0.898 → 0.072** — đa dạng hóa portfolio có thật sau khi thay S3. |

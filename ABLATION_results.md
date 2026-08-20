@@ -74,6 +74,7 @@
 1. **Correlation rất cao (~0.90 ở mọi phân khúc)** — về mặt thuật toán hai strategy gần như là một: cùng pipeline, cùng gate, cùng skeleton market factors, khác nhau chỉ ở biến issuance/buyback (mà buyback ~0).
 2. **Hệ quả**: Strategy 1 và Strategy 3 **không diversify nhau về mặt thực nghiệm**, dù luận điểm kinh doanh đối lập (issuance vs buyback). Điểm này cần xử lý kỹ trong phần trình bày ("giỏ hàng không trùng" không còn là lập luận mạnh).
 3. Về mặt ban tổ chức (1 equity bắt buộc + 1 free), nếu được chọn lại, cặp equity nên đến từ skeleton khác thực sự (ví dụ khác universe hoặc khác cơ chế signal), không phải chỉ khác biến fundamental.
+4. **ĐÃ CHỌN S3 MỚI (20/08/2026)**: thay S3 buyback bằng **N-G — VN-SMALL-CAP skeleton** (`Bbjp7rFqoX`, Sharpe 2.60, MDD -3.3%), corr vs S1 giảm từ **0.898 → 0.072**. Chi tiết candidates (N-A..N-I, momentum VN thất bại, quy tắc auto-publish theo universe) trong `SECOND_DIAGNOSTIC_RESULTS.md` section F.
 
 ---
 
@@ -106,4 +107,4 @@
 2. **Variable fundamental (issuance) đóng vai trò filter/hiệu chỉnh, không phải driver chính**; dấu short issuers đúng nhưng edge mỏng.
 3. **Variable buyback gần như vô hiệu** do dữ liệu VN MID-CAP ~ toàn 0 — cần loại khỏi narrative "buyback anomaly VN".
 4. **S2 là chiến lược có cơ chế alpha độc lập & thật nhất**: momentum pressure + volume weighting đều đóng góp dương; các lớp còn lại (VN30 confirm, threshold) là risk/cost control robust.
-5. Khuyến nghị trình bày nên chuyển trọng tâm từ "3 luận điểm kinh doanh khác nhau" sang "3 cơ chế khác nhau về cấu trúc thị trường (equity cross-sectional vs futures intraday) với OOS decay thấp" — trung thực với kết quả ablation.
+5. Khuyến nghị trình bày nên chuyển trọng tâm từ "3 luận điểm kinh doanh khác nhau" sang "3 cơ chế khác nhau về cấu trúc thị trường (equity cross-sectional MID-CAP + SMALL-CAP vs futures intraday) với OOS decay thấp" — trung thực với kết quả ablation.
