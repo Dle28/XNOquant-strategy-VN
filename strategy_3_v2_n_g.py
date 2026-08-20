@@ -1,5 +1,9 @@
 class CustomStrategy(SimpleAlgorithm):
-    """N-G: VN-SMALL-CAP skeleton (v+d+y+r) - different universe, same mechanism."""
+    """DIAGNOSTIC ONLY: N-G VN-SMALL-CAP skeleton (v+d+y+r).
+
+    Post-selection research candidate used to test diversification vs Strategy 1.
+    Not the competition-facing Strategy 3 in the Grand Final deck.
+    """
     def __algorithm__(self):
         close=self.data.pv_close_panel
         volume=self.data.pv_volume_panel
